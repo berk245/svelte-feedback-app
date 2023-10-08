@@ -1,7 +1,6 @@
 <script>
   import { v4 as uuidv4 } from "uuid";
-
-  import {createEventDispatcher} from 'svelte';
+  import {FeedbackStore} from '../stores';
   import Card from "./Card.svelte";
   import Button from "./Button.svelte";
   import RatingSelect from "./RatingSelect.svelte";
@@ -15,7 +14,6 @@
   $: errorMsg =feedbackText.length > 10 ? "": `Text must be at least ${minTextLength} characters.`;
   $: btnDisabled = feedbackText.length > 10 ? false : true;
 
-  const dispatch = createEventDispatcher()
   const handleRatingSelect = (e) => (rating = e.detail);
   const handleSubmit = () => {
     if (feedbackText.trim().length > minTextLength) {
@@ -25,7 +23,10 @@
         id: uuidv4(),
       };
 
-      dispatch('add-feedback', newFeedback)
+      FeedbackStore.update((currentList) => {
+        return [newFeedback, ...currentList]
+      })
+
       feedbackText = ''
     }
   };

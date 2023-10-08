@@ -7,7 +7,7 @@
 	$: count = feedback.length;
 	$: average = feedback.reduce((a, {rating}) => a + rating ,0) / feedback.length
 
-    onDestroy(()=> unsubscribe())
+    onDestroy(()=> unsubscribe)
 	
 </script>
 

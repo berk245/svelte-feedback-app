@@ -1,11 +1,11 @@
 <script>
-    import {createEventDispatcher} from 'svelte';
+  import { createEventDispatcher } from "svelte";
 
-    const dispatch = createEventDispatcher()
+  const dispatch = createEventDispatcher();
   let selected = 10;
 
   const onChange = (item) => {
-    dispatch('rating-select', item.target.value )
+    dispatch("rating-select", item.target.value);
   };
 </script>
 
